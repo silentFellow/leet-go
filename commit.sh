@@ -9,13 +9,17 @@ commit_by_directory() {
   files=$1
   message_prefix=$2
 
-  for dir in $(echo "$files" | xargs -n1 dirname | sort -u); do
-    files_in_dir=$(echo "$files" | grep "^$dir/")
-    if [ -n "$files_in_dir" ]; then
-      git add $files_in_dir
-      git commit -m "$message_prefix files in $dir"
-    fi
-  done
+  if [ -n "$files" ]; then
+    for dir in $(echo "$files" | xargs -n1 dirname | sort -u); do
+      files_in_dir=$(echo "$files" | grep "^$dir/")
+      if [ -n "$files_in_dir" ]; then
+        git add $files_in_dir
+        git commit -m "$message_prefix files in $dir"
+      fi
+    done
+  else
+    echo "No $message_prefix files to commit."
+  fi
 }
 
 # Commit new files by directory
