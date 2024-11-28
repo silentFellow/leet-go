@@ -1,5 +1,7 @@
 package leetcode
 
+// TODO: Follow up: Recursive solution is trivial, could you do it iteratively?
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
