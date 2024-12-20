@@ -19,25 +19,12 @@ func reverseOddLevels(root *TreeNode) *TreeNode {
 
 	for len(queue) > 0 {
 		n := len(queue)
-		levelValues := []int{}
 
-		// collect all values of the level
-		for i := range n {
-			node := queue[i]
-			levelValues = append(levelValues, node.Val)
-		}
-
-		// reverse if level is odd
+		// if level is odd
 		if level%2 == 1 {
-			for i, j := 0, len(levelValues)-1; i < j; i, j = i+1, j-1 {
-				levelValues[i], levelValues[j] = levelValues[j], levelValues[i]
+			for i, j := 0, len(queue)-1; i < j; i, j = i+1, j-1 {
+				queue[i].Val, queue[j].Val = queue[j].Val, queue[i].Val
 			}
-		}
-
-		// reassign to the tree in reverse order
-		for i := range n {
-			node := queue[i]
-			node.Val = levelValues[i]
 		}
 
 		// append the next level
