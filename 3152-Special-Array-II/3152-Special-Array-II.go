@@ -27,7 +27,7 @@ func isArraySpecial(nums []int, queries [][]int) []bool {
 		si, ei := 0, 0
 
 		// find start index => si
-		l, r := 0, len(subArray)
+		l, r := 0, len(subArray)-1
 		for l <= r {
 			m := (l + r) / 2
 
@@ -42,7 +42,7 @@ func isArraySpecial(nums []int, queries [][]int) []bool {
 		}
 
 		// find end index => ei
-		l, r = 0, len(subArray)
+		l, r = l, len(subArray)-1
 		for l <= r {
 			m := (l + r) / 2
 
