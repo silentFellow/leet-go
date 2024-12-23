@@ -2,41 +2,39 @@ package leetcode
 
 // TODO: verify once again
 
+import (
+	"math"
+	"slices"
+)
+
 func minimumSize(nums []int, maxOperations int) int {
-	sum := 0
-	right := 0
-
-	for _, num := range nums {
-		sum += num
-		right = max(num, right)
-	}
-
-	left := sum / (len(nums) + maxOperations)
-	if sum % (len(nums)+maxOperations) != 0 {
-		left++
-	}
-
-	for left < right {
+	canDivide := func(n int) bool {
 		operations := 0
-		mid := (left + right) / 2
 
-		for _, num := range nums {
-			operations += num / mid
-			if num % mid == 0 {
-				operations--
-			}
+		for _, val := range nums {
+			required := int(math.Ceil(float64(val)/float64(n))) - 1
+			operations += required
 
 			if operations > maxOperations {
-				break
+				return false
 			}
 		}
 
-		if operations > maxOperations {
-			left = mid + 1
+		return true
+	}
+
+	l, r := 0, slices.Max(nums)
+	ans := -1
+	for l <= r {
+		m := (l + r) / 2
+
+		if canDivide(m) {
+			ans = m
+			r = m - 1
 		} else {
-			right = mid
+			l = m + 1
 		}
 	}
 
-	return left
+	return ans
 }
