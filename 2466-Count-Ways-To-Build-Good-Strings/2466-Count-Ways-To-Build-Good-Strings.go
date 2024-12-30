@@ -26,6 +26,7 @@ func countGoodStrings(low int, high int, zero int, one int) int {
 
 		res += backtrack(zeroType)
 		res += backtrack(oneType)
+    dp[length] = res
 
 		return res % mod
 	}
