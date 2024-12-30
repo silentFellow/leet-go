@@ -1,11 +1,11 @@
 package leetcode
 
 func mergeSortedList(nums1, nums2 []int) []int {
-  if len(nums1) == 0 {
-    return nums2
-  } else if len(nums2) == 0 {
-    return nums1
-  }
+	if len(nums1) == 0 {
+		return nums2
+	} else if len(nums2) == 0 {
+		return nums1
+	}
 
 	res := make([]int, len(nums1)+len(nums2))
 	i, j, temp := 0, 0, 0
@@ -38,10 +38,10 @@ func mergeSortedList(nums1, nums2 []int) []int {
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	arr := mergeSortedList(nums1, nums2)
 
-  if len(arr)%2 == 0 {
-    middle := len(arr)/2
-    return float64(arr[middle] + arr[middle-1]) / 2
-  } else {
-    return float64(arr[len(arr)/2])
-  }
+	if len(arr)%2 == 0 {
+		middle := len(arr) / 2
+		return float64(arr[middle]+arr[middle-1]) / 2
+	} else {
+		return float64(arr[len(arr)/2])
+	}
 }
