@@ -1,24 +1,21 @@
 package leetcode
 
-import "math"
-
 func maxAscendingSum(nums []int) int {
-	if len(nums) == 1 {
+	n := len(nums)
+	if n == 1 {
 		return nums[0]
 	}
 
 	sum, maxSum := nums[0], 0
-
 	for i, j := 0, 1; j < len(nums); i, j = i+1, j+1 {
-		if nums[i] < nums[j] {
+		if nums[j] > nums[i] {
 			sum += nums[j]
 		} else {
-			maxSum = int(math.Max(float64(sum), float64(maxSum)))
+			maxSum = max(maxSum, sum)
 			sum = nums[j]
 		}
 	}
-
-	maxSum = int(math.Max(float64(sum), float64(maxSum)))
+	maxSum = max(maxSum, sum)
 
 	return maxSum
 }
