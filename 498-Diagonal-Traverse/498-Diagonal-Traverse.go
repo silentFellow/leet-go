@@ -44,3 +44,31 @@ func findDiagonalOrder(mat [][]int) []int {
 
 	return ans
 }
+
+// hashmap approach
+// func findDiagonalOrder(mat [][]int) []int {
+// 	hmap := make(map[int][]int)
+//
+// 	for i, row := range mat {
+// 		for j, col := range row {
+// 			hmap[i+j] = append(hmap[i+j], col)
+// 		}
+// 	}
+//
+// 	m, n := len(mat), len(mat[0])
+// 	ans := []int{}
+// 	for i := range m + n - 1 {
+// 		val := hmap[i]
+// 		if i%2 != 0 {
+// 			for _, v := range val {
+// 				ans = append(ans, v)
+// 			}
+// 		} else {
+// 			for j := len(val) - 1; j >= 0; j-- {
+// 				ans = append(ans, val[j])
+// 			}
+// 		}
+// 	}
+//
+// 	return ans
+// }
