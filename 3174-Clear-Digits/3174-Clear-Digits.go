@@ -7,19 +7,19 @@ import (
 
 func clearDigits(s string) string {
 	notAllowed := make([]bool, len(s))
-	characters := []int{}
+	charIdx := []int{}
 
 	for i, val := range s {
 		if unicode.IsLetter(val) {
-			characters = append([]int{i}, characters...)
+			charIdx = append([]int{i}, charIdx...)
 		}
 
 		if unicode.IsDigit(val) {
 			notAllowed[i] = true
 
-			if len(characters) > 0 {
-				notAllowed[characters[0]] = true
-				characters = characters[1:]
+			if len(charIdx) > 0 {
+				notAllowed[charIdx[0]] = true
+				charIdx = charIdx[1:]
 			}
 		}
 	}
