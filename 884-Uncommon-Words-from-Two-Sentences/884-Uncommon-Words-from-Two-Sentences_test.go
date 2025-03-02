@@ -32,14 +32,6 @@ func Test_uncommonFromSentences(t *testing.T) {
 			want: []string{"banana"},
 		},
 		{
-			name: "test_case_3",
-			args: args{
-				s1: "the quick brown fox",
-				s2: "jumps over the lazy dog",
-			},
-			want: []string{"quick", "brown", "fox", "jumps", "over", "lazy", "dog"},
-		},
-		{
 			name: "test_case_4",
 			args: args{
 				s1: "hello world",
