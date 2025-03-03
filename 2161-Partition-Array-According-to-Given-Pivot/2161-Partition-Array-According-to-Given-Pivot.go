@@ -1,5 +1,7 @@
 package leetcode
 
+// TODO: try to do in constant space
+
 func pivotArray(nums []int, pivot int) []int {
 	ans := make([]int, len(nums))
 	pivotCount := 0
