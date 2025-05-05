@@ -13,7 +13,7 @@ func canChange(start string, target string) bool {
 		}
 
 		// start[l] and start[r] can be target[l] && target[r] from 2nd condition
-    // since both are anyway wqual by first condition
+		// since both are anyway wqual by first condition
 		if (start[l] != target[r]) || (start[l] == 'L' && l < r) || (start[l] == 'R' && l > r) {
 			return false
 		}
