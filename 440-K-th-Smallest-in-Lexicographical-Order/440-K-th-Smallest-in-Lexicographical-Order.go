@@ -9,10 +9,10 @@ func findKthNumber(n int, k int) int {
 			return cur
 		}
 
-		if cur * 10 <= n {
+		if cur*10 <= n {
 			cur *= 10
 		} else {
-			for cur % 10 == 9 || cur+1 > n {
+			for cur%10 == 9 || cur+1 > n {
 				cur /= 10
 			}
 			cur++
