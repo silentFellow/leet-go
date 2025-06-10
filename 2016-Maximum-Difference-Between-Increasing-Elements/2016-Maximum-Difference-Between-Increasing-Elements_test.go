@@ -14,6 +14,7 @@ func Test_maximumDifference(t *testing.T) {
 		{"example1", args{[]int{7, 1, 5, 4}}, 4},
 		{"example2", args{[]int{9, 4, 3, 2}}, -1},
 		{"example3", args{[]int{1, 5, 2, 10}}, 9},
+		{"all increasing", args{[]int{1, 2, 3, 4, 5}}, 4},
 		{"all decreasing", args{[]int{5, 4, 3, 2, 1}}, -1},
 		{"two elements increasing", args{[]int{1, 2}}, 1},
 		{"two elements decreasing", args{[]int{2, 1}}, -1},
