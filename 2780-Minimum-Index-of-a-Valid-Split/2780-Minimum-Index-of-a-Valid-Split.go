@@ -1,36 +1,29 @@
 package leetcode
 
 func minimumIndex(nums []int) int {
-	// Step 1: Find the majority element using Boyer-Moore Voting Algorithm
-	candidate, count := 0, 0
-	for _, num := range nums {
-		if count == 0 {
-			candidate = num
+	n := len(nums)
+	isMajority := func(n int, count int) bool {
+		return count*2 > n
+	}
+
+	initialMajority := nums[0]
+	hmap := make(map[int]int)
+	for _, v := range nums {
+		hmap[v]++
+
+		if isMajority(n, hmap[v]) {
+			initialMajority = v
 		}
-		if num == candidate {
+	}
+	majorityCount := hmap[initialMajority]
+
+	count := 0
+	for i, v := range nums {
+		if v == initialMajority {
 			count++
-		} else {
-			count--
 		}
-	}
 
-	// Step 2: Count occurrences of the majority element
-	totalCount := 0
-	for _, num := range nums {
-		if num == candidate {
-			totalCount++
-		}
-	}
-
-	// Step 3: Find the minimum index where the split is valid
-	leftCount := 0
-	for i := 0; i < len(nums); i++ {
-		if nums[i] == candidate {
-			leftCount++
-		}
-		rightCount := totalCount - leftCount
-
-		if leftCount > (i+1)/2 && rightCount > (len(nums)-(i+1))/2 {
+		if isMajority(i+1, count) && isMajority(n-i-1, majorityCount-count) {
 			return i
 		}
 	}
