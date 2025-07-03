@@ -12,18 +12,18 @@ func minimumOperations(nums []int) int {
 		}
 	}
 
-	count, start := 0, 0
-	for len(hmap) != 0 {
-		count++
-		for i := start; i < min(start+3, len(nums)); i++ {
-			if v, ok := hmap[nums[i]]; ok {
-				hmap[nums[i]]--
-				if v-1 == 1 {
-					delete(hmap, nums[i])
-				}
+	nonDistinct, count, idx := len(hmap), 0, 0
+	for nonDistinct != 0 {
+		for i := idx; i < idx+3 && i < len(nums); i++ {
+			hmap[nums[i]]--
+			if hmap[nums[i]] == 1 {
+				delete(hmap, nums[i])
+				nonDistinct--
 			}
 		}
-		start += 3
+
+		idx += 3
+		count++
 	}
 
 	return count
