@@ -39,27 +39,11 @@ func (this *pairList) Pop() any {
 func findXSum(nums []int, k int, x int) []int {
 	ans := make([]int, 0)
 
-	pairHeap := &pairList{}
-	heap.Init(pairHeap)
-
 	hmap := make(map[int]int)
 	for i := range k {
 		hmap[nums[i]]++
 	}
-	for k, v := range hmap {
-		heap.Push(pairHeap, pair{
-			val:  k,
-			freq: v,
-		})
-	}
-	cur := 0
-	tempSum := 0
-	for pairHeap.Len() > 0 && cur != x {
-		top := heap.Pop(pairHeap).(pair)
-		tempSum += (top.val * top.freq)
-		cur++
-	}
-	ans = append(ans, tempSum)
+	ans = append(ans, topXSum(hmap, x))
 
 	left := 0
 	for right := k; right < len(nums); right++ {
@@ -70,22 +54,30 @@ func findXSum(nums []int, k int, x int) []int {
 		left++
 
 		hmap[nums[right]]++
-		pairHeap = &pairList{}
-		for k, v := range hmap {
-			heap.Push(pairHeap, pair{
-				val:  k,
-				freq: v,
-			})
-		}
-		cur := 0
-		tempSum := 0
-		for pairHeap.Len() > 0 && cur != x {
-			top := heap.Pop(pairHeap).(pair)
-			tempSum += (top.val * top.freq)
-			cur++
-		}
-		ans = append(ans, tempSum)
+		ans = append(ans, topXSum(hmap, x))
 	}
 
 	return ans
+}
+
+// can use a helper function
+func topXSum(hmap map[int]int, x int) int {
+	pairHeap := &pairList{}
+	heap.Init(pairHeap)
+
+	for k, v := range hmap {
+		heap.Push(pairHeap, pair{
+			val:  k,
+			freq: v,
+		})
+	}
+	cur := 0
+	topSum := 0
+	for pairHeap.Len() > 0 && cur != x {
+		top := heap.Pop(pairHeap).(pair)
+		topSum += (top.val * top.freq)
+		cur++
+	}
+
+	return topSum
 }
