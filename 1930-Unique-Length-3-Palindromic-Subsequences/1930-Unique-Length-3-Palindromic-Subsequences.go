@@ -5,27 +5,30 @@ func countPalindromicSubsequence(s string) int {
 
 	for i := range 26 {
 		first[i] = -1
+		last[i] = -1
 	}
 
-	for i, char := range s {
-		charIdx := char - 'a'
-		if first[charIdx] == -1 {
-			first[charIdx] = i
+	for i, v := range s {
+		pos := v - 'a'
+		if first[pos] == -1 {
+			first[pos] = i
 		}
-		last[charIdx] = i
+		last[pos] = i
 	}
 
-	count := 0
-	for char := range 26 {
-		if first[char] != -1 && last[char] > first[char] {
-			set := make(map[rune]struct{})
-			for i := first[char] + 1; i < last[char]; i++ {
-				set[rune(s[i])] = struct{}{}
-			}
-
-			count += len(set)
+	ans := 0
+	for i := range 26 {
+		if first[i] == -1 {
+			continue
 		}
+
+		set := make(map[rune]struct{})
+		for j := first[i] + 1; j < last[i]; j++ {
+			set[rune(s[j])] = struct{}{}
+		}
+
+		ans += len(set)
 	}
 
-	return count
+	return ans
 }
