@@ -1,8 +1,6 @@
 package leetcode
 
-import (
-	"testing"
-)
+import "testing"
 
 func isValidBST(root *TreeNode, min, max *TreeNode) bool {
 	if root == nil {
